@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hamed Abderrahmane Bouraoui — Mathematician</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #ffffff;
+      --text:      #404040;
+      --muted:     #808080;
+      --link:      #008AFF;
+      --hover:     #0085A1;
+      --nav-bg:    #EAEAEA;
+      --nav-text:  #404040;
+      --nav-border:#DDDDDD;
+      --footer-bg: #EAEAEA;
+      --border:    #eeeeee;
+      --light-bg:  #f9f9f9;
+      --accent:    #0085A1;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', 'Times New Roman', serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.5;
+      font-size: 1rem;
+    }
+
+    h1, h2, h3, h4, h5, .nav-title, .section-title, label {
+      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    a { color: var(--link); text-decoration: none; transition: color .2s; }
+    a:hover { color: var(--hover); }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--nav-border);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .625rem 1.5rem;
+    }
+    .nav-title {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--nav-text); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .85rem; font-weight: 600;
+      color: var(--nav-text); letter-spacing: .02em;
+    }
+    .nav-links a:hover { color: var(--hover); }
+
+    /* ── INTRO / HERO ── */
+    .intro {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .intro::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #008AFF, var(--accent));
+    }
+    .intro-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), #008AFF);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem; font-weight: 700; color: #fff;
+      margin: 0 auto 1.5rem;
+      border: 3px solid rgba(255,255,255,.2);
+    }
+    .intro h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #ffffff; font-weight: 700;
+      margin-bottom: .5rem; line-height: 1.2;
+    }
+    .intro-subtitle {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem; color: rgba(255,255,255,.75);
+      margin-bottom: .4rem;
+    }
+    .intro-inst {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .9rem; color: #63b3ed;
+      margin-bottom: 2rem;
+    }
+    .intro-links { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: 'Open Sans', sans-serif;
+      font-size: .82rem; font-weight: 600;
+      padding: .55rem 1.4rem; border-radius: .3rem;
+      text-decoration: none; transition: all .2s;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #006d87; color: #fff; transform: translateY(-1px); }
+    .btn-ghost {
+      border: 1px solid rgba(255,255,255,.4); color: rgba(255,255,255,.85);
+    }
+    .btn-ghost:hover { border-color: #63b3ed; color: #63b3ed; }
+
+    /* ── STATS ── */
+    .stats {
+      background: var(--accent);
+      padding: 1.8rem 2rem;
+    }
+    .stats-inner {
+      max-width: 900px; margin: auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; text-align: center;
+    }
+    .stat-n {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 2rem; font-weight: 700; color: #fff;
+    }
+    .stat-l {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .72rem; color: rgba(255,255,255,.75);
+      text-transform: uppercase; letter-spacing: .08em; margin-top: .2rem;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page-content { max-width: 1100px; margin: auto; padding: 3rem 1.5rem; }
+
+    /* ── SECTION ── */
+    .section { margin-bottom: 4rem; }
+    .section-header { margin-bottom: 1.8rem; border-bottom: 2px solid var(--border); padding-bottom: .8rem; }
+    .section-title {
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--text); margin-bottom: .2rem;
+    }
+    .section-sub { font-size: .88rem; color: var(--muted); font-family: 'Open Sans', sans-serif; }
+
+    /* ── ABOUT GRID ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; }
+    .about-body p {
+      font-size: 1rem; color: var(--text);
+      margin-bottom: 1.875rem; line-height: 1.7;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: -.5rem; }
+    .tag {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .75rem; font-weight: 600;
+      background: #e8f4f8; color: var(--accent);
+      padding: .25rem .75rem; border-radius: 2rem;
+      border: 1px solid #c3e0eb;
+    }
+    .contact-box {
+      background: var(--light-bg);
+      border: 1px solid var(--border);
+      border-radius: .4rem; padding: 1.4rem;
+    }
+    .contact-box h3 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 1rem;
+      padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+    }
+    .cinfo { display: flex; gap: .7rem; margin-bottom: .9rem; align-items: flex-start; }
+    .cinfo-icon { font-size: .95rem; flex-shrink: 0; margin-top: .1rem; }
+    .cinfo-label { font-family: 'Open Sans', sans-serif; font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
+    .cinfo-val { font-size: .88rem; color: var(--text); }
+    .cinfo-val a { color: var(--link); }
+
+    /* ── EDUCATION ── */
+    .edu-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-item {
+      display: flex; gap: 1.2rem;
+      padding: 1.2rem 1.5rem;
+      background: var(--light-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: .4rem;
+    }
+    .edu-icon { font-size: 1.5rem; flex-shrink: 0; }
+    .edu-deg { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
+    .edu-uni { font-size: .9rem; color: var(--muted); margin: .2rem 0; }
+    .edu-period {
+      font-family: 'Open Sans', sans-serif;
+      display: inline-block; font-size: .75rem;
+      background: #e8f4f8; color: var(--accent);
+      padding: .15rem .6rem; border-radius: 2rem; margin-top: .3rem;
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-items { display: flex; flex-direction: column; gap: 1rem; }
+    .pub-item {
+      padding: 1.3rem 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-bottom: 3px solid var(--border);
+      border-radius: .4rem;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .pub-item:hover {
+      border-bottom-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(0,133,161,.1);
+    }
+    .pub-title { font-weight: 600; font-size: .97rem; color: var(--text); margin-bottom: .4rem; line-height: 1.45; }
+    .pub-authors { font-family: 'Open Sans', sans-serif; font-size: .83rem; color: var(--muted); margin-bottom: .5rem; }
+    .pub-authors strong { color: var(--accent); }
+    .pub-footer { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+    .pub-journal { font-style: italic; font-size: .83rem; color: var(--muted); flex: 1; min-width: 180px; }
+    .badge {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .68rem; font-weight: 700;
+      padding: .18rem .55rem; border-radius: .25rem;
+      letter-spacing: .04em;
+    }
+    .q1  { background: #dcfce7; color: #166534; }
+    .q2  { background: #dbeafe; color: #1e40af; }
+    .q3  { background: #fef9c3; color: #854d0e; }
+    .q4  { background: #fee2e2; color: #991b1b; }
+    .bna { background: #f1f5f9; color: #475569; }
+    .yr  { background: var(--accent); color: #fff; font-size: .7rem; padding: .18rem .55rem; border-radius: .25rem; font-family: 'Open Sans', sans-serif; font-weight: 600; }
+    .cite { font-family: 'Open Sans', sans-serif; font-size: .75rem; color: var(--muted); }
+    .doi { font-family: 'Open Sans', sans-serif; font-size: .75rem; font-weight: 600; color: var(--link); }
+    .doi:hover { color: var(--hover); }
+
+    /* ── TEACHING ── */
+    .teach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .teach-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: .4rem; padding: 1.2rem 1.3rem;
+      transition: box-shadow .2s, transform .2s;
+      position: relative;
+    }
+    .teach-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    .teach-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; border-radius: .4rem .4rem 0 0;
+    }
+    .teach-card.bachelor::before { background: #008AFF; }
+    .teach-card.master::before   { background: var(--accent); }
+    .teach-lvl {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      margin-bottom: .5rem;
+    }
+    .teach-lvl.bachelor { color: #008AFF; }
+    .teach-lvl.master   { color: var(--accent); }
+    .teach-name { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: .5rem; }
+    .teach-yr { font-family: 'Open Sans', sans-serif; font-size: .78rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .skill-card {
+      background: var(--light-bg); border: 1px solid var(--border);
+      border-radius: .4rem; padding: 1.3rem;
+    }
+    .skill-cat {
+      font-family: 'Open Sans', sans-serif;
+      font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em;
+      color: var(--accent); margin-bottom: .6rem;
+    }
+    .skill-list { font-size: .9rem; color: var(--text); line-height: 2; }
+    .skill-list span {
+      display: inline-block;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 2rem; font-family: 'Open Sans', sans-serif;
+      font-size: .78rem; padding: .2rem .7rem; margin: .15rem .1rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--light-bg); border: 1px solid var(--border);
+      border-radius: .4rem; padding: 2rem;
+    }
+    .contact-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
+    .contact-entry { display: flex; gap: .8rem; align-items: flex-start; }
+    .contact-entry-icon { font-size: 1rem; flex-shrink: 0; margin-top: .15rem; }
+    .contact-entry-label { font-family: 'Open Sans', sans-serif; font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: .1rem; }
+    .contact-entry-val { font-size: .9rem; color: var(--text); }
+    .contact-entry-val a { color: var(--link); font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--footer-bg);
+      border-top: 1px solid var(--nav-border);
+      text-align: center; padding: 1.5rem;
+      font-family: 'Open Sans', sans-serif;
+      font-size: .8rem; color: #777;
+    }
+    footer a { color: #404040; }
+    footer a:hover { color: var(--hover); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-title">Hamed Bouraoui</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#teaching">Teaching</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- INTRO -->
+<div class="intro">
+  <div class="intro-avatar">HB</div>
+  <h1>Hamed Abderrahmane Bouraoui</h1>
+  <p class="intro-subtitle">Assistant Professor &amp; Researcher in Mathematics</p>
+  <p class="intro-inst">National Higher School of Mathematics (NHSM) &nbsp;·&nbsp; Alger, Algeria</p>
+  <div class="intro-links">
+    <a href="mailto:hamed.bouraoui@nhsm.edu.dz" class="btn btn-primary">✉ Contact Me</a>
+    <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank" class="btn btn-ghost">ResearchGate</a>
+    <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank" class="btn btn-ghost">Google Scholar</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div><div class="stat-n">7</div><div class="stat-l">Publications</div></div>
+    <div><div class="stat-n">19</div><div class="stat-l">Total Citations</div></div>
+    <div><div class="stat-n">4</div><div class="stat-l">Q1 / Q2 Journals</div></div>
+    <div><div class="stat-n">7</div><div class="stat-l">Courses Taught</div></div>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <div class="section-header">
+      <h2 class="section-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          I am an assistant professor and researcher in Mathematics at the
+          <strong>National Higher School of Mathematics (NHSM)</strong>, Alger, Algeria.
+          My research sits at the intersection of mathematical analysis, numerical methods,
+          and mathematical physics, with a particular focus on the stability of thermoelastic systems.
+        </p>
+        <p>
+          I have contributed to the theoretical and numerical study of Bresse, Timoshenko,
+          and Lord–Shulman systems, publishing in internationally recognised journals including
+          <em>Mathematical Methods in the Applied Sciences</em>,
+          <em>Computers &amp; Mathematics with Applications</em>, and <em>Applicable Analysis</em>.
+        </p>
+        <p>
+          Alongside my research, I am committed to teaching and mentoring students at both bachelor
+          and master levels, covering topics from foundational analysis to advanced stochastic optimal
+          control and computer algebra systems.
+        </p>
+        <h4 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.7rem;">Research Interests</h4>
+        <div class="tags">
+          <span class="tag">Stability Analysis</span>
+          <span class="tag">Numerical Analysis</span>
+          <span class="tag">Thermoelasticity</span>
+          <span class="tag">Modeling &amp; Simulation</span>
+          <span class="tag">Computational Mathematics</span>
+          <span class="tag">Optimal Control</span>
+        </div>
+      </div>
+      <div>
+        <div class="contact-box">
+          <h3>Quick Info</h3>
+          <div class="cinfo">
+            <div class="cinfo-icon">🏛️</div>
+            <div>
+              <div class="cinfo-label">Institution</div>
+              <div class="cinfo-val">NHSM, Alger, Algeria</div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">✉️</div>
+            <div>
+              <div class="cinfo-label">Email</div>
+              <div class="cinfo-val"><a href="mailto:hamed.bouraoui@nhsm.edu.dz">hamed.bouraoui@nhsm.edu.dz</a></div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">📞</div>
+            <div>
+              <div class="cinfo-label">Phone</div>
+              <div class="cinfo-val">+213 665 292 714</div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">🌐</div>
+            <div>
+              <div class="cinfo-label">Profiles</div>
+              <div class="cinfo-val">
+                <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank">ResearchGate</a>
+                &nbsp;·&nbsp;
+                <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank">Scholar</a>
+              </div>
+            </div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-icon">🗣️</div>
+            <div>
+              <div class="cinfo-label">Languages</div>
+              <div class="cinfo-val">Arabic · English · French</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section" id="education">
+    <div class="section-header">
+      <h2 class="section-title">Education</h2>
+    </div>
+    <div class="edu-items">
+
+      <div class="edu-item">
+        <div class="edu-icon">🎓</div>
+        <div>
+          <div class="edu-deg">Master of Science in Mathematics</div>
+          <div class="edu-uni">Badji Mokhtar–Annaba University, Annaba, Algeria</div>
+          <span class="edu-period">September 2018 – July 2020</span>
+        </div>
+      </div>
+
+      <div class="edu-item">
+        <div class="edu-icon">📘</div>
+        <div>
+          <div class="edu-deg">Bachelor of Science in Mathematics</div>
+          <div class="edu-uni">Badji Mokhtar–Annaba University, Annaba, Algeria</div>
+          <span class="edu-period">September 2016 – June 2018</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PUBLICATIONS -->
+  <div class="section" id="publications">
+    <div class="section-header">
+      <h2 class="section-title">Publications</h2>
+      <p class="section-sub">Journal papers · 7 publications · 19 total citations</p>
+    </div>
+    <div class="pub-items">
+
+      <div class="pub-item">
+        <div class="pub-title">Exponential stability for a thermoelastic Bresse system: theoretical and numerical study</div>
+        <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, El Arwadi T, Haiour M</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Mathematical Methods in the Applied Sciences, 46(5), 6002–6024</span>
+          <span class="badge q1">Q1</span>
+          <span class="yr">2023</span>
+          <span class="cite">📄 6 citations</span>
+          <a class="doi" href="https://doi.org/10.1002/mma.8885" target="_blank">DOI ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Exponential stability and numerical analysis of Timoshenko system with dual-phase-lag thermoelasticity</div>
+        <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, Sahari ML, Boulaaras S</div>
+        <div class="pub-footer">
+          <span class="pub-journal">International Journal of Numerical Modelling, e3179</span>
+          <span class="badge q3">Q3</span>
+          <span class="yr">2024</span>
+          <span class="cite">📄 6 citations</span>
+          <a class="doi" href="https://doi.org/10.1002/jnm.3179" target="_blank">DOI ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">New stability result for Bresse system with dual-phase-lag thermoelasticity</div>
+        <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, El Arwadi T</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Applicable Analysis, 103(16), 3049–3066</span>
+          <span class="badge q2">Q2</span>
+          <span class="yr">2024</span>
+          <span class="cite">📄 3 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Exponential stability of Timoshenko beams with three-phase-lag thermoelasticity</div>
+        <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, Souahi A</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Computers &amp; Mathematics with Applications, 168, 58–83</span>
+          <span class="badge q1">Q1</span>
+          <span class="yr">2024</span>
+          <span class="cite">📄 3 citations</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">Stabilization of Lord Shulman Porous thermoelastic system from second spectrum viewpoint</div>
+        <div class="pub-authors">Zougheib H, El Arwadi T, <strong>Bouraoui HA</strong>, Djebabla A</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Afrika Matematika, 36(2), 85</span>
+          <span class="badge q3">Q3</span>
+          <span class="yr">2025</span>
+          <span class="cite">📄 1 citation</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">On the Existence and Asymptotic Stability of Lord–Shulman System with Microtemperature</div>
+        <div class="pub-authors">Boudeliou M, Kilani B, Djebabla A, <strong>Bouraoui HA</strong></div>
+        <div class="pub-footer">
+          <span class="pub-journal">BAU Journal – Science and Technology, 7(1), 7</span>
+          <span class="badge bna">NA</span>
+          <span class="yr">2025</span>
+        </div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-title">General Energy Decay Study for Memory Type Timoshenko System with Thermoelasticity Type III with Memory Damping Terms</div>
+        <div class="pub-authors">Bellal N, Messikh C, <strong>Bouraoui HA</strong>, Djebabla A</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Journal of Applied Nonlinear Dynamics, 13(02), 307–322</span>
+          <span class="badge q4">Q4</span>
+          <span class="yr">2024</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TEACHING -->
+  <div class="section" id="teaching">
+    <div class="section-header">
+      <h2 class="section-title">Teaching</h2>
+      <p class="section-sub">Lecturer · Badji Mokhtar–Annaba University · March 2021 – Present · Lab of Numerical Analysis, Optimization and Statistics</p>
+    </div>
+    <div class="teach-grid">
+
+      <div class="teach-card bachelor">
+        <div class="teach-lvl bachelor">Bachelor · 1st Year</div>
+        <div class="teach-name">Analysis &amp; Algebra 1</div>
+        <div class="teach-yr">📅 2021 – 2022</div>
+      </div>
+
+      <div class="teach-card bachelor">
+        <div class="teach-lvl bachelor">Bachelor · 2nd Year</div>
+        <div class="teach-name">Analysis 1</div>
+        <div class="teach-yr">📅 2022 – 2023</div>
+      </div>
+
+      <div class="teach-card master">
+        <div class="teach-lvl master">Master · 2nd Year</div>
+        <div class="teach-name">Stochastic Optimal Control</div>
+        <div class="teach-yr">📅 2024 – 2025</div>
+      </div>
+
+      <div class="teach-card master">
+        <div class="teach-lvl master">Master · 2nd Year</div>
+        <div class="teach-name">Mathematical Computing Tools</div>
+        <div class="teach-yr">📅 2024 – 2025 &amp; 2025 – 2026</div>
+      </div>
+
+      <div class="teach-card master">
+        <div class="teach-lvl master">Master · 2nd Year</div>
+        <div class="teach-name">Analysis 1</div>
+        <div class="teach-yr">📅 2025 – 2026</div>
+      </div>
+
+      <div class="teach-card master">
+        <div class="teach-lvl master">Master · 2nd Year</div>
+        <div class="teach-name">Formal Calculus</div>
+        <div class="teach-yr">📅 2025 – 2026</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section" id="skills">
+    <div class="section-header">
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-cat">Programming</div>
+        <div class="skill-list">
+          <span>C++ (Advanced)</span>
+          <span>Python (Intermediate)</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Scientific Software</div>
+        <div class="skill-list">
+          <span>Matlab</span>
+          <span>FEniCS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Document Tools</div>
+        <div class="skill-list">
+          <span>LaTeX</span>
+          <span>Microsoft Office</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-cat">Languages</div>
+        <div class="skill-list">
+          <span>Arabic (Native)</span>
+          <span>English</span>
+          <span>French</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <div class="section-header">
+      <h2 class="section-title">Contact</h2>
+    </div>
+    <div class="contact-section">
+      <div class="contact-cols">
+        <div class="contact-entry">
+          <div class="contact-entry-icon">✉️</div>
+          <div>
+            <div class="contact-entry-label">Email</div>
+            <div class="contact-entry-val"><a href="mailto:hamed.bouraoui@nhsm.edu.dz">hamed.bouraoui@nhsm.edu.dz</a></div>
+          </div>
+        </div>
+        <div class="contact-entry">
+          <div class="contact-entry-icon">📞</div>
+          <div>
+            <div class="contact-entry-label">Phone</div>
+            <div class="contact-entry-val">+213 665 292 714</div>
+          </div>
+        </div>
+        <div class="contact-entry">
+          <div class="contact-entry-icon">📍</div>
+          <div>
+            <div class="contact-entry-label">Address</div>
+            <div class="contact-entry-val">Annaba, Algeria</div>
+          </div>
+        </div>
+        <div class="contact-entry">
+          <div class="contact-entry-icon">🎓</div>
+          <div>
+            <div class="contact-entry-label">ResearchGate</div>
+            <div class="contact-entry-val"><a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank">View Profile</a></div>
+          </div>
+        </div>
+        <div class="contact-entry">
+          <div class="contact-entry-icon">📚</div>
+          <div>
+            <div class="contact-entry-label">Google Scholar</div>
+            <div class="contact-entry-val"><a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank">View Profile</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-content -->
+
+<!-- FOOTER -->
+<footer>
+  <p>
+    Hamed Abderrahmane Bouraoui &nbsp;·&nbsp;
+    National Higher School of Mathematics, Alger &nbsp;·&nbsp;
+    <a href="mailto:hamed.bouraoui@nhsm.edu.dz">hamed.bouraoui@nhsm.edu.dz</a>
+  </p>
+</footer>
+
+</body>
+</html>
