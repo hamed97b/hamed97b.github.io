@@ -4,23 +4,23 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hamed Abderrahmane Bouraoui — Mathematician</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #ffffff;
-      --text:      #404040;
-      --muted:     #808080;
-      --link:      #008AFF;
-      --hover:     #0085A1;
-      --nav-bg:    #EAEAEA;
-      --nav-text:  #404040;
-      --nav-border:#DDDDDD;
-      --footer-bg: #EAEAEA;
-      --border:    #eeeeee;
-      --light-bg:  #f9f9f9;
-      --accent:    #0085A1;
+      --bg:         #ffffff;
+      --text:       #0f172a;
+      --muted:      #64748b;
+      --link:       #0077b6;
+      --hover:      #023e8a;
+      --nav-bg:     rgba(255,255,255,0.96);
+      --nav-border: #e2e8f0;
+      --footer-bg:  #0f172a;
+      --border:     #e2e8f0;
+      --light-bg:   #f8fafc;
+      --accent:     #0077b6;
+      --accent2:    #00b4d8;
     }
 
     html { scroll-behavior: smooth; }
@@ -29,283 +29,375 @@
       font-family: 'Lora', 'Times New Roman', serif;
       color: var(--text);
       background: var(--bg);
-      line-height: 1.5;
+      line-height: 1.6;
       font-size: 1rem;
     }
 
-    h1, h2, h3, h4, h5, .nav-title, .section-title, label {
-      font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    h1, h2, h3, h4, button, .nav-title, .section-title {
+      font-family: 'Inter', 'Helvetica Neue', sans-serif;
     }
 
     a { color: var(--link); text-decoration: none; transition: color .2s; }
     a:hover { color: var(--hover); }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── NAVBAR ── */
     nav {
       background: var(--nav-bg);
       border-bottom: 1px solid var(--nav-border);
       position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .nav-inner {
       max-width: 1200px; margin: auto;
       display: flex; align-items: center; justify-content: space-between;
-      padding: .625rem 1.5rem;
+      padding: .75rem 1.5rem;
     }
     .nav-title {
-      font-size: 1.1rem; font-weight: 700;
-      color: var(--nav-text); text-decoration: none;
+      font-size: .97rem; font-weight: 700;
+      color: var(--text); text-decoration: none;
+      letter-spacing: -.02em;
     }
     .nav-links { display: flex; gap: 1.5rem; list-style: none; }
     .nav-links a {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .85rem; font-weight: 600;
-      color: var(--nav-text); letter-spacing: .02em;
+      font-family: 'Inter', sans-serif;
+      font-size: .83rem; font-weight: 500;
+      color: var(--text); letter-spacing: .01em;
+      transition: color .2s;
     }
-    .nav-links a:hover { color: var(--hover); }
+    .nav-links a:hover { color: var(--accent); }
 
-    /* ── INTRO / HERO ── */
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      background: none; border: none; cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text); border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-nav {
+      display: none;
+      background: var(--nav-bg);
+      border-top: 1px solid var(--nav-border);
+      padding: 1rem 1.5rem 1.2rem;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav ul { list-style: none; display: flex; flex-direction: column; gap: .85rem; }
+    .mobile-nav a {
+      font-family: 'Inter', sans-serif;
+      font-size: .95rem; font-weight: 500; color: var(--text);
+    }
+    .mobile-nav a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
     .intro {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      padding: 6rem 2rem 5rem;
+      background: linear-gradient(135deg, #080820 0%, #0a1a3a 55%, #0c2d58 100%);
+      padding: 6.5rem 2rem 5.5rem;
       text-align: center;
       position: relative; overflow: hidden;
+    }
+    .math-bg {
+      position: absolute; inset: 0;
+      pointer-events: none; overflow: hidden;
+    }
+    .math-bg span {
+      position: absolute;
+      font-family: 'Lora', serif;
+      color: rgba(255,255,255,.045);
+      user-select: none;
+      animation: floatSym linear infinite;
+    }
+    @keyframes floatSym {
+      0%   { transform: translateY(0)   rotate(0deg); opacity: .045; }
+      50%  { transform: translateY(-18px) rotate(6deg); opacity: .07; }
+      100% { transform: translateY(0)   rotate(0deg); opacity: .045; }
     }
     .intro::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--accent), #008AFF, var(--accent));
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent2), transparent);
     }
     .intro-avatar {
-      width: 100px; height: 100px;
+      width: 90px; height: 90px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent), #008AFF);
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
       display: flex; align-items: center; justify-content: center;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 2rem; font-weight: 700; color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 1.8rem; font-weight: 700; color: #fff;
       margin: 0 auto 1.5rem;
-      border: 3px solid rgba(255,255,255,.2);
+      border: 2px solid rgba(255,255,255,.15);
+      box-shadow: 0 0 48px rgba(0,180,216,.3);
     }
     .intro h1 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      color: #ffffff; font-weight: 700;
-      margin-bottom: .5rem; line-height: 1.2;
+      font-size: clamp(1.75rem, 4.5vw, 2.9rem);
+      color: #fff; font-weight: 700;
+      margin-bottom: .5rem; line-height: 1.15;
+      letter-spacing: -.025em;
     }
     .intro-subtitle {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 1rem; color: rgba(255,255,255,.75);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; color: rgba(255,255,255,.7);
       margin-bottom: .4rem;
     }
     .intro-inst {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .9rem; color: #63b3ed;
-      margin-bottom: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .88rem; color: #90e0ef;
+      margin-bottom: 2.2rem; letter-spacing: .01em;
     }
-    .intro-links { display: flex; gap: .8rem; justify-content: center; flex-wrap: wrap; }
+    .intro-links { display: flex; gap: .7rem; justify-content: center; flex-wrap: wrap; }
+
     .btn {
       display: inline-flex; align-items: center; gap: .4rem;
-      font-family: 'Open Sans', sans-serif;
-      font-size: .82rem; font-weight: 600;
-      padding: .55rem 1.4rem; border-radius: .3rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .81rem; font-weight: 600;
+      padding: .55rem 1.3rem; border-radius: .3rem;
       text-decoration: none; transition: all .2s;
+      white-space: nowrap;
     }
     .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: #006d87; color: #fff; transform: translateY(-1px); }
-    .btn-ghost {
-      border: 1px solid rgba(255,255,255,.4); color: rgba(255,255,255,.85);
-    }
-    .btn-ghost:hover { border-color: #63b3ed; color: #63b3ed; }
+    .btn-primary:hover { background: #005f99; color: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,119,182,.45); }
+    .btn-ghost { border: 1px solid rgba(255,255,255,.3); color: rgba(255,255,255,.8); }
+    .btn-ghost:hover { border-color: #90e0ef; color: #90e0ef; }
+    .btn-cv { background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.28); color: rgba(255,255,255,.85); }
+    .btn-cv:hover { background: rgba(255,255,255,.17); color: #fff; border-color: rgba(255,255,255,.5); }
 
     /* ── STATS ── */
-    .stats {
-      background: var(--accent);
-      padding: 1.8rem 2rem;
-    }
+    .stats { background: var(--accent); padding: 1.8rem 2rem; }
     .stats-inner {
       max-width: 900px; margin: auto;
       display: grid; grid-template-columns: repeat(4, 1fr);
       gap: 1rem; text-align: center;
     }
     .stat-n {
-      font-family: 'Open Sans', sans-serif;
-      font-size: 2rem; font-weight: 700; color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 2.2rem; font-weight: 700; color: #fff;
+      letter-spacing: -.03em;
     }
     .stat-l {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .72rem; color: rgba(255,255,255,.75);
-      text-transform: uppercase; letter-spacing: .08em; margin-top: .2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .7rem; color: rgba(255,255,255,.72);
+      text-transform: uppercase; letter-spacing: .1em; margin-top: .2rem;
     }
 
-    /* ── MAIN LAYOUT ── */
-    .page-content { max-width: 1100px; margin: auto; padding: 3rem 1.5rem; }
+    /* ── PAGE LAYOUT ── */
+    .page-content { max-width: 1100px; margin: auto; padding: 3.5rem 1.5rem; }
 
     /* ── SECTION ── */
-    .section { margin-bottom: 4rem; }
-    .section-header { margin-bottom: 1.8rem; border-bottom: 2px solid var(--border); padding-bottom: .8rem; }
+    .section { margin-bottom: 4.5rem; }
+    .section-header { margin-bottom: 2rem; }
     .section-title {
-      font-size: 1.7rem; font-weight: 700;
-      color: var(--text); margin-bottom: .2rem;
+      font-size: 1.55rem; font-weight: 700;
+      color: var(--text); letter-spacing: -.02em;
+      padding-bottom: .75rem;
+      border-bottom: 2px solid var(--border);
     }
-    .section-sub { font-size: .88rem; color: var(--muted); font-family: 'Open Sans', sans-serif; }
+    .section-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: .84rem; color: var(--muted); margin-top: .45rem;
+    }
 
-    /* ── ABOUT GRID ── */
-    .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 2.5rem; }
-    .about-body p {
-      font-size: 1rem; color: var(--text);
-      margin-bottom: 1.875rem; line-height: 1.7;
-    }
-    .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: -.5rem; }
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 300px; gap: 3rem; }
+    .about-body p { font-size: 1rem; color: var(--text); margin-bottom: 1.4rem; line-height: 1.8; }
+    .tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .25rem; }
     .tag {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .75rem; font-weight: 600;
-      background: #e8f4f8; color: var(--accent);
+      font-family: 'Inter', sans-serif;
+      font-size: .73rem; font-weight: 500;
+      background: #e0f2fe; color: #0369a1;
       padding: .25rem .75rem; border-radius: 2rem;
-      border: 1px solid #c3e0eb;
+      border: 1px solid #bae6fd;
     }
     .contact-box {
       background: var(--light-bg);
       border: 1px solid var(--border);
-      border-radius: .4rem; padding: 1.4rem;
+      border-radius: .5rem; padding: 1.5rem;
     }
     .contact-box h3 {
-      font-size: 1rem; font-weight: 700; margin-bottom: 1rem;
-      padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+      font-size: .92rem; font-weight: 700; margin-bottom: 1rem;
+      padding-bottom: .55rem; border-bottom: 1px solid var(--border);
+      letter-spacing: -.01em;
     }
-    .cinfo { display: flex; gap: .7rem; margin-bottom: .9rem; align-items: flex-start; }
-    .cinfo-icon { font-size: .95rem; flex-shrink: 0; margin-top: .1rem; }
-    .cinfo-label { font-family: 'Open Sans', sans-serif; font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); }
-    .cinfo-val { font-size: .88rem; color: var(--text); }
+    .cinfo { display: flex; gap: .7rem; margin-bottom: .85rem; align-items: flex-start; }
+    .cinfo-icon { font-size: .92rem; flex-shrink: 0; margin-top: .1rem; }
+    .cinfo-label { font-family: 'Inter', sans-serif; font-size: .63rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .1rem; }
+    .cinfo-val { font-size: .87rem; color: var(--text); }
     .cinfo-val a { color: var(--link); }
 
     /* ── EDUCATION ── */
-    .edu-items { display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-items { display: flex; flex-direction: column; gap: 1rem; }
     .edu-item {
       display: flex; gap: 1.2rem;
-      padding: 1.2rem 1.5rem;
+      padding: 1.3rem 1.5rem;
       background: var(--light-bg);
       border: 1px solid var(--border);
-      border-left: 4px solid var(--accent);
-      border-radius: .4rem;
+      border-left: 3px solid var(--accent);
+      border-radius: .5rem;
+      transition: box-shadow .2s;
     }
-    .edu-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .edu-deg { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); }
-    .edu-uni { font-size: .9rem; color: var(--muted); margin: .2rem 0; }
+    .edu-item:hover { box-shadow: 0 4px 18px rgba(0,0,0,.07); }
+    .edu-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .edu-deg { font-family: 'Inter', sans-serif; font-weight: 700; font-size: .96rem; color: var(--text); letter-spacing: -.01em; }
+    .edu-uni { font-size: .88rem; color: var(--muted); margin: .25rem 0; }
     .edu-period {
-      font-family: 'Open Sans', sans-serif;
-      display: inline-block; font-size: .75rem;
-      background: #e8f4f8; color: var(--accent);
-      padding: .15rem .6rem; border-radius: 2rem; margin-top: .3rem;
+      font-family: 'Inter', sans-serif;
+      display: inline-block; font-size: .72rem; font-weight: 500;
+      background: #e0f2fe; color: #0369a1;
+      padding: .15rem .65rem; border-radius: 2rem; margin-top: .3rem;
     }
 
+    /* ── PUB FILTERS ── */
+    .pub-filters { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.5rem; }
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: .76rem; font-weight: 600;
+      padding: .35rem .9rem; border-radius: 2rem;
+      border: 1px solid var(--border);
+      background: var(--bg); color: var(--muted);
+      cursor: pointer; transition: all .2s;
+      letter-spacing: .02em;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
     /* ── PUBLICATIONS ── */
-    .pub-items { display: flex; flex-direction: column; gap: 1rem; }
+    .pub-items { display: flex; flex-direction: column; gap: .85rem; }
     .pub-item {
-      padding: 1.3rem 1.5rem;
+      padding: 1.3rem 1.5rem 1.3rem 1.8rem;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-bottom: 3px solid var(--border);
-      border-radius: .4rem;
-      transition: border-color .2s, box-shadow .2s;
+      border-radius: .5rem;
+      position: relative;
+      transition: box-shadow .2s;
     }
-    .pub-item:hover {
-      border-bottom-color: var(--accent);
-      box-shadow: 0 4px 16px rgba(0,133,161,.1);
+    .pub-item::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      border-radius: .5rem 0 0 .5rem;
+      background: var(--border);
+      transition: background .2s;
     }
-    .pub-title { font-weight: 600; font-size: .97rem; color: var(--text); margin-bottom: .4rem; line-height: 1.45; }
-    .pub-authors { font-family: 'Open Sans', sans-serif; font-size: .83rem; color: var(--muted); margin-bottom: .5rem; }
+    .pub-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+    .pub-item:hover::before { background: var(--accent); }
+    .pub-item.hidden { display: none; }
+    .pub-title { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: .4rem; line-height: 1.5; letter-spacing: -.01em; }
+    .pub-authors { font-family: 'Inter', sans-serif; font-size: .81rem; color: var(--muted); margin-bottom: .55rem; }
     .pub-authors strong { color: var(--accent); }
     .pub-footer { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
-    .pub-journal { font-style: italic; font-size: .83rem; color: var(--muted); flex: 1; min-width: 180px; }
+    .pub-journal { font-style: italic; font-size: .81rem; color: var(--muted); flex: 1; min-width: 180px; }
     .badge {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .68rem; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      font-size: .65rem; font-weight: 700;
       padding: .18rem .55rem; border-radius: .25rem;
-      letter-spacing: .04em;
+      letter-spacing: .05em;
     }
     .q1  { background: #dcfce7; color: #166534; }
     .q2  { background: #dbeafe; color: #1e40af; }
     .q3  { background: #fef9c3; color: #854d0e; }
     .q4  { background: #fee2e2; color: #991b1b; }
     .bna { background: #f1f5f9; color: #475569; }
-    .yr  { background: var(--accent); color: #fff; font-size: .7rem; padding: .18rem .55rem; border-radius: .25rem; font-family: 'Open Sans', sans-serif; font-weight: 600; }
-    .cite { font-family: 'Open Sans', sans-serif; font-size: .75rem; color: var(--muted); }
-    .doi { font-family: 'Open Sans', sans-serif; font-size: .75rem; font-weight: 600; color: var(--link); }
+    .yr  { background: var(--accent); color: #fff; font-size: .67rem; padding: .18rem .55rem; border-radius: .25rem; font-family: 'Inter', sans-serif; font-weight: 600; }
+    .cite { font-family: 'Inter', sans-serif; font-size: .73rem; color: var(--muted); }
+    .doi { font-family: 'Inter', sans-serif; font-size: .73rem; font-weight: 600; color: var(--link); }
     .doi:hover { color: var(--hover); }
 
     /* ── TEACHING ── */
-    .teach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+    .teach-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: .9rem; }
     .teach-card {
       background: var(--bg); border: 1px solid var(--border);
-      border-radius: .4rem; padding: 1.2rem 1.3rem;
+      border-radius: .5rem; padding: 1.2rem 1.3rem;
       transition: box-shadow .2s, transform .2s;
-      position: relative;
+      position: relative; overflow: hidden;
     }
-    .teach-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+    .teach-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.09); }
     .teach-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0;
-      height: 3px; border-radius: .4rem .4rem 0 0;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     }
-    .teach-card.bachelor::before { background: #008AFF; }
-    .teach-card.master::before   { background: var(--accent); }
+    .teach-card.bachelor::before { background: linear-gradient(90deg, #0077b6, #00b4d8); }
+    .teach-card.master::before   { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
     .teach-lvl {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .68rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: .1em;
-      margin-bottom: .5rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .64rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem;
     }
-    .teach-lvl.bachelor { color: #008AFF; }
-    .teach-lvl.master   { color: var(--accent); }
-    .teach-name { font-weight: 600; font-size: .95rem; color: var(--text); margin-bottom: .5rem; }
-    .teach-yr { font-family: 'Open Sans', sans-serif; font-size: .78rem; color: var(--muted); }
+    .teach-lvl.bachelor { color: #0077b6; }
+    .teach-lvl.master   { color: #7c3aed; }
+    .teach-name { font-family: 'Inter', sans-serif; font-weight: 600; font-size: .91rem; color: var(--text); margin-bottom: .45rem; letter-spacing: -.01em; }
+    .teach-yr { font-family: 'Inter', sans-serif; font-size: .75rem; color: var(--muted); }
 
     /* ── SKILLS ── */
-    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .9rem; }
     .skill-card {
       background: var(--light-bg); border: 1px solid var(--border);
-      border-radius: .4rem; padding: 1.3rem;
+      border-radius: .5rem; padding: 1.3rem;
+      transition: box-shadow .2s;
     }
+    .skill-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
     .skill-cat {
-      font-family: 'Open Sans', sans-serif;
-      font-size: .72rem; font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: .1em;
-      color: var(--accent); margin-bottom: .6rem;
+      color: var(--accent); margin-bottom: .7rem;
     }
-    .skill-list { font-size: .9rem; color: var(--text); line-height: 2; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: .4rem; }
     .skill-list span {
       display: inline-block;
       background: var(--bg); border: 1px solid var(--border);
-      border-radius: 2rem; font-family: 'Open Sans', sans-serif;
-      font-size: .78rem; padding: .2rem .7rem; margin: .15rem .1rem;
+      border-radius: 2rem; font-family: 'Inter', sans-serif;
+      font-size: .75rem; padding: .2rem .7rem; color: var(--text);
     }
 
     /* ── CONTACT ── */
     .contact-section {
       background: var(--light-bg); border: 1px solid var(--border);
-      border-radius: .4rem; padding: 2rem;
+      border-radius: .5rem; padding: 2rem 2.5rem;
     }
     .contact-cols { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.5rem; }
     .contact-entry { display: flex; gap: .8rem; align-items: flex-start; }
     .contact-entry-icon { font-size: 1rem; flex-shrink: 0; margin-top: .15rem; }
-    .contact-entry-label { font-family: 'Open Sans', sans-serif; font-size: .68rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: .1rem; }
+    .contact-entry-label { font-family: 'Inter', sans-serif; font-size: .63rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: .1rem; }
     .contact-entry-val { font-size: .9rem; color: var(--text); }
-    .contact-entry-val a { color: var(--link); font-weight: 600; }
+    .contact-entry-val a { color: var(--link); font-weight: 500; }
 
     /* ── FOOTER ── */
     footer {
       background: var(--footer-bg);
-      border-top: 1px solid var(--nav-border);
-      text-align: center; padding: 1.5rem;
-      font-family: 'Open Sans', sans-serif;
-      font-size: .8rem; color: #777;
+      text-align: center; padding: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: .79rem; color: rgba(255,255,255,.45);
     }
-    footer a { color: #404040; }
-    footer a:hover { color: var(--hover); }
+    footer a { color: rgba(255,255,255,.6); }
+    footer a:hover { color: var(--accent2); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .about-grid { grid-template-columns: 1fr; }
       .stats-inner { grid-template-columns: repeat(2, 1fr); }
       .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .contact-section { padding: 1.5rem; }
+    }
+    @media (max-width: 480px) {
+      .intro { padding: 4.5rem 1.5rem 4rem; }
+      .page-content { padding: 2.5rem 1rem; }
     }
   </style>
 </head>
@@ -323,29 +415,44 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#about"        class="mob-link">About</a></li>
+      <li><a href="#education"    class="mob-link">Education</a></li>
+      <li><a href="#publications" class="mob-link">Publications</a></li>
+      <li><a href="#teaching"     class="mob-link">Teaching</a></li>
+      <li><a href="#skills"       class="mob-link">Skills</a></li>
+      <li><a href="#contact"      class="mob-link">Contact</a></li>
+    </ul>
   </div>
 </nav>
 
-<!-- INTRO -->
+<!-- HERO -->
 <div class="intro">
+  <div class="math-bg" aria-hidden="true" id="mathBg"></div>
   <div class="intro-avatar">HB</div>
   <h1>Hamed Abderrahmane Bouraoui</h1>
   <p class="intro-subtitle">Assistant Professor &amp; Researcher in Mathematics</p>
   <p class="intro-inst">National Higher School of Mathematics (NHSM) &nbsp;·&nbsp; Alger, Algeria</p>
   <div class="intro-links">
+    <a href="cv.pdf" download class="btn btn-cv">⬇ Download CV</a>
     <a href="mailto:hamed.bouraoui@nhsm.edu.dz" class="btn btn-primary">✉ Contact Me</a>
-    <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank" class="btn btn-ghost">ResearchGate</a>
-    <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank" class="btn btn-ghost">Google Scholar</a>
+    <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank" rel="noopener" class="btn btn-ghost">ResearchGate</a>
+    <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank" rel="noopener" class="btn btn-ghost">Google Scholar</a>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stats-inner">
-    <div><div class="stat-n">7</div><div class="stat-l">Publications</div></div>
-    <div><div class="stat-n">19</div><div class="stat-l">Total Citations</div></div>
-    <div><div class="stat-n">4</div><div class="stat-l">Q1 / Q2 Journals</div></div>
-    <div><div class="stat-n">7</div><div class="stat-l">Courses Taught</div></div>
+  <div class="stats-inner" id="statsBar">
+    <div><div class="stat-n" data-target="7">0</div><div class="stat-l">Publications</div></div>
+    <div><div class="stat-n" data-target="19">0</div><div class="stat-l">Total Citations</div></div>
+    <div><div class="stat-n" data-target="4">0</div><div class="stat-l">Q1 / Q2 Journals</div></div>
+    <div><div class="stat-n" data-target="7">0</div><div class="stat-l">Courses Taught</div></div>
   </div>
 </div>
 
@@ -353,30 +460,16 @@
 <div class="page-content">
 
   <!-- ABOUT -->
-  <div class="section" id="about">
+  <div class="section reveal" id="about">
     <div class="section-header">
       <h2 class="section-title">About</h2>
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p>
-          I am an assistant professor and researcher in Mathematics at the
-          <strong>National Higher School of Mathematics (NHSM)</strong>, Alger, Algeria.
-          My research sits at the intersection of mathematical analysis, numerical methods,
-          and mathematical physics, with a particular focus on the stability of thermoelastic systems.
-        </p>
-        <p>
-          I have contributed to the theoretical and numerical study of Bresse, Timoshenko,
-          and Lord–Shulman systems, publishing in internationally recognised journals including
-          <em>Mathematical Methods in the Applied Sciences</em>,
-          <em>Computers &amp; Mathematics with Applications</em>, and <em>Applicable Analysis</em>.
-        </p>
-        <p>
-          Alongside my research, I am committed to teaching and mentoring students at both bachelor
-          and master levels, covering topics from foundational analysis to advanced stochastic optimal
-          control and computer algebra systems.
-        </p>
-        <h4 style="font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.7rem;">Research Interests</h4>
+        <p>I am an assistant professor and researcher in Mathematics at the <strong>National Higher School of Mathematics (NHSM)</strong>, Alger, Algeria. My research sits at the intersection of mathematical analysis, numerical methods, and mathematical physics, with a particular focus on the stability of thermoelastic systems.</p>
+        <p>I have contributed to the theoretical and numerical study of Bresse, Timoshenko, and Lord–Shulman systems, publishing in internationally recognised journals including <em>Mathematical Methods in the Applied Sciences</em>, <em>Computers &amp; Mathematics with Applications</em>, and <em>Applicable Analysis</em>.</p>
+        <p>Alongside my research, I am committed to teaching and mentoring students at both bachelor and master levels, covering topics from foundational analysis to advanced stochastic optimal control and computer algebra systems.</p>
+        <h4 style="font-family:'Inter',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem;">Research Interests</h4>
         <div class="tags">
           <span class="tag">Stability Analysis</span>
           <span class="tag">Numerical Analysis</span>
@@ -415,9 +508,9 @@
             <div>
               <div class="cinfo-label">Profiles</div>
               <div class="cinfo-val">
-                <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank">ResearchGate</a>
+                <a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank" rel="noopener">ResearchGate</a>
                 &nbsp;·&nbsp;
-                <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank">Scholar</a>
+                <a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank" rel="noopener">Scholar</a>
               </div>
             </div>
           </div>
@@ -434,12 +527,11 @@
   </div>
 
   <!-- EDUCATION -->
-  <div class="section" id="education">
+  <div class="section reveal" id="education">
     <div class="section-header">
       <h2 class="section-title">Education</h2>
     </div>
     <div class="edu-items">
-
       <div class="edu-item">
         <div class="edu-icon">🎓</div>
         <div>
@@ -448,7 +540,6 @@
           <span class="edu-period">September 2018 – July 2020</span>
         </div>
       </div>
-
       <div class="edu-item">
         <div class="edu-icon">📘</div>
         <div>
@@ -457,19 +548,27 @@
           <span class="edu-period">September 2016 – June 2018</span>
         </div>
       </div>
-
     </div>
   </div>
 
   <!-- PUBLICATIONS -->
-  <div class="section" id="publications">
+  <div class="section reveal" id="publications">
     <div class="section-header">
       <h2 class="section-title">Publications</h2>
       <p class="section-sub">Journal papers · 7 publications · 19 total citations</p>
     </div>
+    <div class="pub-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="q1">Q1</button>
+      <button class="filter-btn" data-filter="q2">Q2</button>
+      <button class="filter-btn" data-filter="q3">Q3 / Q4</button>
+      <button class="filter-btn" data-filter="2023">2023</button>
+      <button class="filter-btn" data-filter="2024">2024</button>
+      <button class="filter-btn" data-filter="2025">2025</button>
+    </div>
     <div class="pub-items">
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q1" data-year="2023">
         <div class="pub-title">Exponential stability for a thermoelastic Bresse system: theoretical and numerical study</div>
         <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, El Arwadi T, Haiour M</div>
         <div class="pub-footer">
@@ -477,11 +576,11 @@
           <span class="badge q1">Q1</span>
           <span class="yr">2023</span>
           <span class="cite">📄 6 citations</span>
-          <a class="doi" href="https://doi.org/10.1002/mma.8885" target="_blank">DOI ↗</a>
+          <a class="doi" href="https://doi.org/10.1002/mma.8885" target="_blank" rel="noopener">DOI ↗</a>
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q3" data-year="2024">
         <div class="pub-title">Exponential stability and numerical analysis of Timoshenko system with dual-phase-lag thermoelasticity</div>
         <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, Sahari ML, Boulaaras S</div>
         <div class="pub-footer">
@@ -489,11 +588,11 @@
           <span class="badge q3">Q3</span>
           <span class="yr">2024</span>
           <span class="cite">📄 6 citations</span>
-          <a class="doi" href="https://doi.org/10.1002/jnm.3179" target="_blank">DOI ↗</a>
+          <a class="doi" href="https://doi.org/10.1002/jnm.3179" target="_blank" rel="noopener">DOI ↗</a>
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q2" data-year="2024">
         <div class="pub-title">New stability result for Bresse system with dual-phase-lag thermoelasticity</div>
         <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, El Arwadi T</div>
         <div class="pub-footer">
@@ -504,7 +603,7 @@
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q1" data-year="2024">
         <div class="pub-title">Exponential stability of Timoshenko beams with three-phase-lag thermoelasticity</div>
         <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, Souahi A</div>
         <div class="pub-footer">
@@ -512,10 +611,11 @@
           <span class="badge q1">Q1</span>
           <span class="yr">2024</span>
           <span class="cite">📄 3 citations</span>
+          <a class="doi" href="https://doi.org/10.1016/j.camwa.2024.05.030" target="_blank" rel="noopener">DOI ↗</a>
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q3" data-year="2025">
         <div class="pub-title">Stabilization of Lord Shulman Porous thermoelastic system from second spectrum viewpoint</div>
         <div class="pub-authors">Zougheib H, El Arwadi T, <strong>Bouraoui HA</strong>, Djebabla A</div>
         <div class="pub-footer">
@@ -526,7 +626,7 @@
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="bna" data-year="2025">
         <div class="pub-title">On the Existence and Asymptotic Stability of Lord–Shulman System with Microtemperature</div>
         <div class="pub-authors">Boudeliou M, Kilani B, Djebabla A, <strong>Bouraoui HA</strong></div>
         <div class="pub-footer">
@@ -536,7 +636,7 @@
         </div>
       </div>
 
-      <div class="pub-item">
+      <div class="pub-item" data-rank="q4" data-year="2024">
         <div class="pub-title">General Energy Decay Study for Memory Type Timoshenko System with Thermoelasticity Type III with Memory Damping Terms</div>
         <div class="pub-authors">Bellal N, Messikh C, <strong>Bouraoui HA</strong>, Djebabla A</div>
         <div class="pub-footer">
@@ -550,7 +650,7 @@
   </div>
 
   <!-- TEACHING -->
-  <div class="section" id="teaching">
+  <div class="section reveal" id="teaching">
     <div class="section-header">
       <h2 class="section-title">Teaching</h2>
       <p class="section-sub">Lecturer · Badji Mokhtar–Annaba University · March 2021 – Present · Lab of Numerical Analysis, Optimization and Statistics</p>
@@ -597,7 +697,7 @@
   </div>
 
   <!-- SKILLS -->
-  <div class="section" id="skills">
+  <div class="section reveal" id="skills">
     <div class="section-header">
       <h2 class="section-title">Skills</h2>
     </div>
@@ -635,7 +735,7 @@
   </div>
 
   <!-- CONTACT -->
-  <div class="section" id="contact">
+  <div class="section reveal" id="contact">
     <div class="section-header">
       <h2 class="section-title">Contact</h2>
     </div>
@@ -666,14 +766,14 @@
           <div class="contact-entry-icon">🎓</div>
           <div>
             <div class="contact-entry-label">ResearchGate</div>
-            <div class="contact-entry-val"><a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank">View Profile</a></div>
+            <div class="contact-entry-val"><a href="https://www.researchgate.net/profile/Hamed-Bouraoui" target="_blank" rel="noopener">View Profile</a></div>
           </div>
         </div>
         <div class="contact-entry">
           <div class="contact-entry-icon">📚</div>
           <div>
             <div class="contact-entry-label">Google Scholar</div>
-            <div class="contact-entry-val"><a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank">View Profile</a></div>
+            <div class="contact-entry-val"><a href="https://scholar.google.fr/citations?user=_JZSK-IAAAAJ&hl=fr&authuser=2" target="_blank" rel="noopener">View Profile</a></div>
           </div>
         </div>
       </div>
@@ -691,5 +791,93 @@
   </p>
 </footer>
 
+<script>
+// ── MATH BACKGROUND SYMBOLS ──
+(function () {
+  const syms = ['∑','∂','∫','∇','Δ','ε','λ','θ','Ω','∞','∈','⊂','α','β','γ','σ','μ','π','∀','∃','≤','≥'];
+  const bg = document.getElementById('mathBg');
+  for (let i = 0; i < 26; i++) {
+    const s = document.createElement('span');
+    s.textContent = syms[i % syms.length];
+    s.style.cssText = [
+      'left:'              + (Math.random() * 100)      + '%',
+      'top:'               + (Math.random() * 100)      + '%',
+      'font-size:'         + (2 + Math.random() * 4.5)  + 'rem',
+      'animation-delay:'   + (Math.random() * 10)       + 's',
+      'animation-duration:'+ (14 + Math.random() * 14)  + 's'
+    ].join(';');
+    bg.appendChild(s);
+  }
+})();
+
+// ── HAMBURGER MENU ──
+const ham      = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+});
+document.querySelectorAll('.mob-link').forEach(link =>
+  link.addEventListener('click', () => {
+    ham.classList.remove('open');
+    mobileNav.classList.remove('open');
+  })
+);
+
+// ── SCROLL REVEAL ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ── ANIMATED STAT COUNTERS ──
+function animateCount(el, target, duration) {
+  let start = null;
+  (function step(ts) {
+    if (!start) start = ts;
+    const p = Math.min((ts - start) / duration, 1);
+    el.textContent = Math.floor(p * target);
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target;
+  })(performance.now());
+}
+
+const statsObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) {
+    document.querySelectorAll('.stat-n[data-target]').forEach(el =>
+      animateCount(el, parseInt(el.dataset.target, 10), 1400)
+    );
+    statsObs.disconnect();
+  }
+}, { threshold: 0.6 });
+statsObs.observe(document.getElementById('statsBar'));
+
+// ── PUBLICATION FILTERS ──
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.pub-item').forEach(item => {
+      if (f === 'all') {
+        item.classList.remove('hidden');
+        return;
+      }
+      const yearMatch = ['2023','2024','2025'].includes(f);
+      if (yearMatch) {
+        item.classList.toggle('hidden', item.dataset.year !== f);
+      } else {
+        const rank = item.dataset.rank;
+        const show = f === 'q3'
+          ? (rank === 'q3' || rank === 'q4' || rank === 'bna')
+          : rank === f;
+        item.classList.toggle('hidden', !show);
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
