@@ -449,7 +449,7 @@
 <!-- STATS -->
 <div class="stats">
   <div class="stats-inner" id="statsBar">
-    <div><div class="stat-n" data-target="7">0</div><div class="stat-l">Publications</div></div>
+    <div><div class="stat-n" data-target="8">0</div><div class="stat-l">Publications</div></div>
     <div><div class="stat-n" data-target="19">0</div><div class="stat-l">Total Citations</div></div>
     <div><div class="stat-n" data-target="4">0</div><div class="stat-l">Q1 / Q2 Journals</div></div>
     <div><div class="stat-n" data-target="7">0</div><div class="stat-l">Courses Taught</div></div>
@@ -466,9 +466,9 @@
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p>I am an assistant professor and researcher in Mathematics at the <strong>National Higher School of Mathematics (NHSM)</strong>, Alger, Algeria. My research sits at the intersection of mathematical analysis, numerical methods, and mathematical physics, with a particular focus on the stability of thermoelastic systems.</p>
-        <p>I have contributed to the theoretical and numerical study of Bresse, Timoshenko, and Lord–Shulman systems, publishing in internationally recognised journals including <em>Mathematical Methods in the Applied Sciences</em>, <em>Computers &amp; Mathematics with Applications</em>, and <em>Applicable Analysis</em>.</p>
-        <p>Alongside my research, I am committed to teaching and mentoring students at both bachelor and master levels, covering topics from foundational analysis to advanced stochastic optimal control and computer algebra systems.</p>
+        <p>I am an assistant professor and researcher in Mathematics at the <strong>National Higher School of Mathematics (NHSM)</strong>, Alger, Algeria. My research sits at the intersection of [...]
+        <p>I have contributed to the theoretical and numerical study of Bresse, Timoshenko, and Lord–Shulman systems, publishing in internationally recognised journals including <em>Mathematica[...]
+        <p>Alongside my research, I am committed to teaching and mentoring students at both bachelor and master levels, covering topics from foundational analysis to advanced stochastic optimal c[...]
         <h4 style="font-family:'Inter',sans-serif;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.75rem;">Research Interests</h4>
         <div class="tags">
           <span class="tag">Stability Analysis</span>
@@ -555,7 +555,7 @@
   <div class="section reveal" id="publications">
     <div class="section-header">
       <h2 class="section-title">Publications</h2>
-      <p class="section-sub">Journal papers · 7 publications · 19 total citations</p>
+      <p class="section-sub">Journal papers · 8 publications · 19 total citations</p>
     </div>
     <div class="pub-filters">
       <button class="filter-btn active" data-filter="all">All</button>
@@ -565,8 +565,20 @@
       <button class="filter-btn" data-filter="2023">2023</button>
       <button class="filter-btn" data-filter="2024">2024</button>
       <button class="filter-btn" data-filter="2025">2025</button>
+      <button class="filter-btn" data-filter="2026">2026</button>
     </div>
     <div class="pub-items">
+
+      <div class="pub-item" data-rank="q2" data-year="2026">
+        <div class="pub-title">Asymptotic behavior of viscoelastic plate with thermoelasticity of Gurtin-Pipkin type</div>
+        <div class="pub-authors"><strong>Bouraoui HA</strong>, Djebabla A, El Arwadi T</div>
+        <div class="pub-footer">
+          <span class="pub-journal">Archivum Mathematicum, 62(1)</span>
+          <span class="badge q2">Q2</span>
+          <span class="yr">2026</span>
+          <a class="doi" href="https://link-springer-com.www.sndl1.arn.dz/article/10.21136/AM.2026.0112-25" target="_blank" rel="noopener">DOI ↗</a>
+        </div>
+      </div>
 
       <div class="pub-item" data-rank="q1" data-year="2023">
         <div class="pub-title">Exponential stability for a thermoelastic Bresse system: theoretical and numerical study</div>
@@ -865,7 +877,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         item.classList.remove('hidden');
         return;
       }
-      const yearMatch = ['2023','2024','2025'].includes(f);
+      const yearMatch = ['2023','2024','2025','2026'].includes(f);
       if (yearMatch) {
         item.classList.toggle('hidden', item.dataset.year !== f);
       } else {
